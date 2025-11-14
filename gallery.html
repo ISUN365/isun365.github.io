@@ -109,4 +109,128 @@
     .arrow {
       position: fixed;
       top: 50%;
-      transform:
+      transform: translateY(-50%);
+      font-size: 60px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      text-shadow: 0 0 20px black;
+      padding: 20px;
+      transition: 0.2s ease;
+    }
+
+    .arrow:hover {
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    .arrow-left {
+      left: 20px;
+    }
+
+    .arrow-right {
+      right: 20px;
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,255,255,0.35);
+      padding: 10px 15px;
+      border-radius: 15px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+<a href="index.html" class="home-btn">Home</a>
+
+<div class="gallery-wrapper">
+  <!-- Replace with your own images -->
+  <div class="gallery-item"><img loading="lazy" src="img1.jpg"></div>
+  <div class="gallery-item"><img loading="lazy" src="img2.jpg"></div>
+  <div class="gallery-item"><img loading="lazy" src="img3.jpg"></div>
+  <div class="gallery-item"><img loading="lazy" src="img4.jpg"></div>
+  <div class="gallery-item"><img loading="lazy" src="img5.jpg"></div>
+  <div class="gallery-item"><img loading="lazy" src="img6.jpg"></div>
+</div>
+
+<div class="modal" id="modal">
+  <span class="close-btn" onclick="closeModal()">×</span>
+  <span class="arrow arrow-left" onclick="prevImage()">‹</span>
+  <span class="arrow arrow-right" onclick="nextImage()">›</span>
+  <img id="modal-img" class="modal-img">
+</div>
+
+<script>
+  const images = Array.from(document.querySelectorAll(".gallery-item img"));
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+
+  let currentIndex = 0;
+
+  // Lazy load fade in
+  images.forEach(img => {
+    img.addEventListener("load", () => img.classList.add("loaded"));
+  });
+
+  // Open modal
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      currentIndex = index;
+      openModal();
+    });
+  });
+
+  function openModal() {
+    modal.style.display = "flex";
+    modalImg.classList.remove("show");
+    modalImg.src = images[currentIndex].src;
+
+    setTimeout(() => modalImg.classList.add("show"), 20);
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    modalImg.classList.remove("show");
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    openModal();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openModal();
+  }
+
+  // Close when clicking outside the image
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Keyboard controls
+  document.addEventListener("keydown", (e) => {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+      if (e.key === "Escape") closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
