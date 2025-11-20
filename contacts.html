@@ -18,8 +18,12 @@
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
     color: white;
     overflow-x: hidden;
+    opacity: 0;
+    transition: opacity 0.45s ease;
   }
-
+  body.fade-in {
+    opacity: 1;
+  }
   .home-btn {
     position: fixed;
     top: 10px;
@@ -88,6 +92,23 @@
 
 
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("fade-in");
+});
+
+document.addEventListener("click", function (e) {
+    const link = e.target.closest("a");
+
+    if (link && link.href && !link.target && !link.href.includes("#")) {
+        e.preventDefault();
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+            window.location = link.href;
+        }, 300); 
+    }
+});
+</script>
 </head>
 
 <body>
@@ -99,22 +120,16 @@
 <div class="social-grid">
 
   <a href="https://youtube.com/@ISUN365" target="_blank" class="social-card">
-
     <div class="social-name">YouTube</div>
   </a>
 
-  
   <a href="https://instagram.com/@hellosomeguy" target="_blank" class="social-card">
-
     <div class="social-name">Instagram</div>
   </a>
 
   <a href="https://tiktok.com/@isun698" target="_blank" class="social-card">
-
     <div class="social-name">TikTok</div>
   </a>
-
- 
 
 </div>
 
