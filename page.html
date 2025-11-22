@@ -56,13 +56,14 @@
       document.addEventListener('keydown', function(event) {
       if ((event.ctrlKey || event.shiftKey) && event.key === "I") {
         event.preventDefault();
-        console.warn('who tf do you think you are.');
+        console.log('who tf do you think you are.');
+        sendNotification("What are you doing?", { body: "imagine stealing code dumbahh" });
         
     }
       if ((event.ctrlKey || event.metaKey) && event.key === "u") {
         event.preventDefault();
-        console.warn('who tf do you think you are.');
-        
+        console.log('who tf do you think you are.');
+        sendNotification("What are you doing?", { body: "imagine stealing code dumbahh" });
     }
   });
 </script>
