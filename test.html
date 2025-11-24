@@ -67,9 +67,9 @@ I do random experiments here-->
     padding: 0;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    width: 10px;   
-    height: 10px;
-    border-radius: 18%;
+    width: 30px;   
+    height: 30px;
+    border-radius: 20%;
     overflow: hidden;
 }
 
@@ -82,7 +82,7 @@ I do random experiments here-->
 .waveform {
     display: flex;
     gap: 3px;
-    height: 10px;
+    height: 30px;
     align-items: flex-end;
     justify-content: center;
 }
@@ -120,7 +120,7 @@ I do random experiments here-->
 const container = document.getElementById("waveform");
 const audio = document.getElementById("player");
 
-const barCount = 20; 
+const barCount = 10; 
 for (let i = 0; i < barCount; i++) {
   let b = document.createElement("div");
   b.classList.add("bar");
