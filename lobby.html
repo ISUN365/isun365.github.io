@@ -1,129 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TianHong</title>
-<link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon"/>
-
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: url("background.gif") center/cover no-repeat;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-  }
-  body.fade-in {
-    opacity: 1;
-  }
-  p {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 30px;
-  }
-  .home-btn{
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    padding: 10px 18px;
-    border-radius: 80px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 1px rgba(255,255,255,0.5),
-                0 8px 25px rgba(0,0,0,0.4);
-  }
-  .home-btn:hover{
-    background: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 0 12px rgba(255,255,255,0.4),
-                0 10px 30px rgba(0,0,0,0.6);
-  }
-  .home-btn:active{
-    transform: scale(0.97);
-  }
-  .welcome-message {
-    font-size: 1.7em;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 25px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.7);
-    backdrop-filter: blur(3px);
-    padding: 12px 24px;
-    border-radius: 14px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-
-  .button-container {
-    display: flex;
-    gap: 20px;
-  }
-
-    }
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("fade-in");
-});
-
-
-document.addEventListener("click", function (e) {
-    const link = e.target.closest("a");
-
-    if (link && link.href && !link.target && !link.href.includes("#")) {
-        e.preventDefault();
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-            window.location = link.href;
-        }, 300); 
-    }
-});
- document.addEventListener('keydown', function(event) {
-      if ((event.ctrlKey || event.shiftKey) && event.key === "I") {
-        event.preventDefault();
-        console.log('who tf do you think you are.');
-        alert("You're quite curious arent you? (Imagine attempting to steal code:/ )");
-        
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TianHong</title>
+  <link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon"/>
+  <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url("background.gif") center/cover no-repeat;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
+        opacity: 0;
+        transition: opacity 0.45s ease;
       }
-      if ((event.ctrlKey || event.metaKey) && event.key === "u") {
-        event.preventDefault();
-        console.log('who tf do you think you are.');
-        alert("You're quite curious arent you? (Imagine attempting to steal code:/)");
+      body.fade-in {
+        opacity: 1;
       }
-      if (event.key === "F12") {
-        event.preventDefault();
-        console.log('who tf do you think you are');
-        alert("You're quite curious arent you? (Imagine attempting to steal code:/ )");
+      p {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.85);
+        margin-bottom: 30px;
       }
-});
-</script>
-</head>
-<body>
-  <a href="/" class="home-btn">Home</a>
- 
-  <div class="welcome-message">
-    Tian Hong (天紅)
-  </div>
+      .home-btn{
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        padding: 10px 18px;
+        border-radius: 80px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 1px rgba(255,255,255,0.5),
+                    0 8px 25px rgba(0,0,0,0.4);
+      }
+      .home-btn:hover{
+        background: rgba(255,255,255,0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px rgba(255,255,255,0.4),
+                    0 10px 30px rgba(0,0,0,0.6);
+      }
+      .home-btn:active{
+        transform: scale(0.97);
+      }
+      .welcome-message {
+        font-size: 1.7em;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 25px;
+        text-shadow: 0 0 15px rgba(255,255,255,0.7);
+        backdrop-filter: blur(3px);
+        padding: 12px 24px;
+        border-radius: 14px;
+        background: rgba(0,0,0,0.3);
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+    
+      .button-container {
+        display: flex;
+        gap: 20px;
+      }
+      .top-left {
+          position: absolute;
+          top: 14px;
+          left: 14px;
+      
+          display: flex;
+          align-items: center;
+          gap: 15px;
+      }
+      
+      .image-btn {
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          width: 42px;   
+          height: 42px;
+          border-radius: 20%;
+          overflow: hidden;
+      }
+      
+      .image-btn img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+      
+      .waveform {
+          display: flex;
+          gap: 3px;
+          height: 42px;
+          align-items: flex-end;
+          justify-content: center;
+      }
+      
+      .bar {
+          width: 5px;
+          background: rgba(255,255,255,0.8);
+          border-radius: 10px;
+          animation: bounce 0.6s ease-in-out infinite alternate;
+      }
+          }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          document.body.classList.add("fade-in");
+      });
+      
+      
+      document.addEventListener("click", function (e) {
+          const link = e.target.closest("a");
+      
+          if (link && link.href && !link.target && !link.href.includes("#")) {
+              e.preventDefault();
+              document.body.classList.add("fade-out");
+              setTimeout(() => {
+                  window.location = link.href;
+              }, 300); 
+          }
+      });
+       document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.shiftKey) && event.key === "I") {
+              event.preventDefault();
+              console.log('who tf do you think you are.');
+              alert("You're quite curious arent you? (Imagine attempting to steal code :/ )");
+              
+            }
+            if ((event.ctrlKey || event.metaKey) && event.key === "U") {
+              event.preventDefault();
+              console.log('who tf do you think you are.');
+              alert("You're quite curious arent you? (Imagine attempting to steal code :/ )");
+            }
+            if (event.key === "F12") {
+              event.preventDefault();
+              console.log('who tf do you think you are');
+              alert("You're quite curious arent you? (Imagine attempting to steal code :/ )");
+            }
+      });
+    </script>
+  </head>
+  <body>
+    <a href="/" class="home-btn">Home</a>
+   <div class="top-left">
+      <button class="image-btn" onclick="togglePlay()">
+          <img src="unnamed (10).jpg" alt="Button">
+      </button>
+  
+      <div class="waveform" id="waveform"></div>
+    </div>
+    
+    <audio id="player" src="ssVid.net--你离开的那天.mp3"></audio>
 
-  <div class="welcome-message" style="animation-delay: 0.1s;">
-      <ul>
-        <p>“當我找到你時，你就在我的懷裡...<br> 我的心，我的愛，我的腦海...<br> 我把你擁在懷裡...<br> 我把你擁入懷中...<br> 你成了我的靈魂，我的未來...”</p>
-        
-      </ul>
-<audio autoplay src="李毅恩Lye - 體驗券你給的體驗券 賜我片刻纏綿 可附贈的痛卻沒有期限動態歌詞PinyinLyrics.mp3" style="display: none;"></audio>
+    <div class="welcome-message">
+      Tian Hong (天紅)
+    </div>
+  
+    <div class="welcome-message" style="animation-delay: 0.1s;">
+        <ul>
+          <p>“當我找到你時，你就在我的懷裡...<br> 我的心，我的愛，我的腦海...<br> 我把你擁在懷裡...<br> 我把你擁入懷中...<br> 你成了我的靈魂，我的未來...”</p>
+          
+        </ul>
 
-</body>
+    <script>
+      const container = document.getElementById("waveform");
+      const audio = document.getElementById("player");
+      
+      const barCount = 10; 
+      for (let i = 0; i < barCount; i++) {
+        let b = document.createElement("div");
+        b.classList.add("bar");
+      
+        b.style.animationDuration = (0.4 + Math.random() * 0.8) + "s";
+        container.appendChild(b);
+      }
+      
+      function togglePlay() {
+        audio.paused ? audio.play() : audio.pause();
+      }
+      
+      audio.onpause = () => {
+        document.querySelectorAll(".bar").forEach(bar => {
+          bar.style.animationPlayState = "paused";
+        });
+      };
+      
+      audio.onplay = () => {
+        document.querySelectorAll(".bar").forEach(bar => {
+          bar.style.animationPlayState = "running";
+        });
+      };
+    </script>
+  </body>
 </html>
