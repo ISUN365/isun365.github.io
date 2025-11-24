@@ -11,7 +11,9 @@ I do random experiments here-->
         height: 100%;
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Helvetica Neue", sans-serif;
-        background:rgba(0,0,0,1)
+        background:
+          linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), 
+          url('background.gif') center/cover no-repeat;
       }
 
       .bg {
@@ -65,9 +67,9 @@ I do random experiments here-->
     padding: 0;
     cursor: pointer;
 
-    width: 80px;   
-    height: 80px;
-    border-radius: 50%;
+    width: 10px;   
+    height: 10px;
+    border-radius: 18%;
     overflow: hidden;
 }
 
@@ -79,8 +81,8 @@ I do random experiments here-->
 
 .waveform {
     display: flex;
-    gap: 6px;
-    height: 60px;
+    gap: 3px;
+    height: 10px;
     align-items: flex-end;
     justify-content: center;
 }
