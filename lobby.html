@@ -112,7 +112,10 @@
           border-radius: 10px;
           animation: bounce 0.6s ease-in-out infinite alternate;
       }
-          }
+      @keyframes bounce {
+        from{height: 10%;}
+        to{height: 100%;}
+      }
     </style>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
