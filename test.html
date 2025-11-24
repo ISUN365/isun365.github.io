@@ -90,6 +90,21 @@ I do random experiments here-->
         }
 
     </style>
+
+  </head>
+<body>
+  <a href="/" class="home-btn">Home</a>
+<!--  <div class="bg"></div>-->
+  
+<div class="audio-container">
+  <audio id="player" src="李毅恩Lye - 體驗券你給的體驗券 賜我片刻纏綿 可附贈的痛卻沒有期限動態歌詞PinyinLyrics.mp3"></audio>
+
+  <div class="waveform" id="waveform">
+
+  </div>
+
+  <button onclick="togglePlay()">Play / Pause</button>
+</div>
     <script>
 const container = document.getElementById("waveform");
 const audio = document.getElementById("player");
@@ -119,21 +134,6 @@ audio.onplay = () => {
   });
 };
 </script>
-
-  </head>
-<body>
-  <a href="/" class="home-btn">Home</a>
-<!--  <div class="bg"></div>-->
-  
-<div class="audio-container">
-  <audio id="player" src="李毅恩Lye - 體驗券你給的體驗券 賜我片刻纏綿 可附贈的痛卻沒有期限動態歌詞PinyinLyrics.mp3"></audio>
-
-  <div class="waveform" id="waveform">
-
-  </div>
-
-  <button onclick="togglePlay()">Play / Pause</button>
-</div>
 
 </body>
 </html>
