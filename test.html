@@ -114,113 +114,113 @@ I do random experiments here-->
  </style>
 
   </head>
-<body>
-  <a href="/" class="home-btn">Home</a>
-<!--  <div class="bg"></div>-->
-   <div class="top-left">
-      <button class="image-btn">
-          <img src="unnamed (10).jpg" alt="Button" onclick="togglePlay()">
-      </button>
-  
-      <div class="waveform" id="waveform"></div>
-    </div>
+  <body>
+    <a href="/" class="home-btn">Home</a>
+  <!--  <div class="bg"></div>-->
+     <div class="top-left">
+        <button class="image-btn">
+            <img src="unnamed (11).jpg" alt="Button" onclick="togglePlay()">
+        </button>
     
-    <audio id="player" src="ssVid.net--你离开的那天.mp3"></audio>
-<script>
-const container = document.getElementById("waveform");
-const audio = document.getElementById("player");
-
-const barCount = 15;
-let bars = [];
-let barHeights = new Array(barCount).fill(0);
-let velocities = new Array(barCount).fill(0);
-
-for (let i = 0; i < barCount; i++) {
-    let bar = document.createElement("div");
-    bar.classList.add("bar");
-    bar.style.height = "4px";
-    container.appendChild(bar);
-    bars.push(bar);
-}
-
-let audioCtx = null;
-let analyser = null;
-let frequencyData = null;
-
-function initAudio() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 256;
-
-    const src = audioCtx.createMediaElementSource(audio);
-    src.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    frequencyData = new Uint8Array(analyser.frequencyBinCount);
-}
-
-function animateBars() {
-    requestAnimationFrame(animateBars);
-
-    if (!analyser) return;
-
-    analyser.getByteFrequencyData(frequencyData);
-
-    let samplesPerBar = Math.floor(frequencyData.length / barCount);
-
-    for (let i = 0; i < barCount; i++) {
-        let sum = 0;
-        let start = i * samplesPerBar;
-        for (let j = 0; j < samplesPerBar; j++) sum += frequencyData[start + j];
-        let volume = sum / samplesPerBar;
-
-        let maxHeight = 40;
-        let target = (volume / 255) * maxHeight;
-        let current = barHeights[i];
-
-        let spring = 0.25;
-        let friction = 0.12;
-        let bounce = 0.3;
-
-        if (target > current) {
-            velocities[i] += (target - current) * spring;
-        } else {
-            velocities[i] -= (current - target) * friction;
-            velocities[i] += bounce;
-        }
-
-        velocities[i] *= 0.82;
-        current += velocities[i];
-
-        if (current < 0) current = 0;
-
-        barHeights[i] = current;
-
-        bars[i].style.height = current + "px";
-    }
-}
-
-document.querySelector(".image-btn").onclick = () => {
-    if (!audioCtx) initAudio();
-
-    if (audio.paused) {
-        audio.play();
-    } else {
-        audio.pause();
-    }
-};
-
-audio.onplay = () => {
-    bars.forEach(b => b.classList.remove("paused"));
-    animateBars();
-};
-
-audio.onpause = () => {
-    bars.forEach((bar, i) => {
-        bar.style.setProperty("--current-height", barHeights[i] + "px");
-        bar.classList.add("paused");
-    });
-};
-</script>
-</body>
+        <div class="waveform" id="waveform"></div>
+      </div>
+      
+      <audio id="player" src="ssVid.net--生分-男版.mp3"></audio>
+    <script>
+      const container = document.getElementById("waveform");
+      const audio = document.getElementById("player");
+      
+      const barCount = 15;
+      let bars = [];
+      let barHeights = new Array(barCount).fill(0);
+      let velocities = new Array(barCount).fill(0);
+      
+      for (let i = 0; i < barCount; i++) {
+          let bar = document.createElement("div");
+          bar.classList.add("bar");
+          bar.style.height = "4px";
+          container.appendChild(bar);
+          bars.push(bar);
+      }
+      
+      let audioCtx = null;
+      let analyser = null;
+      let frequencyData = null;
+      
+      function initAudio() {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 256;
+      
+          const src = audioCtx.createMediaElementSource(audio);
+          src.connect(analyser);
+          analyser.connect(audioCtx.destination);
+      
+          frequencyData = new Uint8Array(analyser.frequencyBinCount);
+      }
+      
+      function animateBars() {
+          requestAnimationFrame(animateBars);
+      
+          if (!analyser) return;
+      
+          analyser.getByteFrequencyData(frequencyData);
+      
+          let samplesPerBar = Math.floor(frequencyData.length / barCount);
+      
+          for (let i = 0; i < barCount; i++) {
+              let sum = 0;
+              let start = i * samplesPerBar;
+              for (let j = 0; j < samplesPerBar; j++) sum += frequencyData[start + j];
+              let volume = sum / samplesPerBar;
+      
+              let maxHeight = 40;
+              let target = (volume / 255) * maxHeight;
+              let current = barHeights[i];
+      
+              let spring = 0.25;
+              let friction = 0.12;
+              let bounce = 0.3;
+      
+              if (target > current) {
+                  velocities[i] += (target - current) * spring;
+              } else {
+                  velocities[i] -= (current - target) * friction;
+                  velocities[i] += bounce;
+              }
+      
+              velocities[i] *= 0.82;
+              current += velocities[i];
+      
+              if (current < 0) current = 0;
+      
+              barHeights[i] = current;
+      
+              bars[i].style.height = current + "px";
+          }
+      }
+      
+      document.querySelector(".image-btn").onclick = () => {
+          if (!audioCtx) initAudio();
+      
+          if (audio.paused) {
+              audio.play();
+          } else {
+              audio.pause();
+          }
+      };
+      
+      audio.onplay = () => {
+          bars.forEach(b => b.classList.remove("paused"));
+          animateBars();
+      };
+      
+      audio.onpause = () => {
+          bars.forEach((bar, i) => {
+              bar.style.setProperty("--current-height", barHeights[i] + "px");
+              bar.classList.add("paused");
+          });
+      };
+    </script>
+  </body>
 </html>
