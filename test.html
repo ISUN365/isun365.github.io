@@ -6,6 +6,7 @@
     <title>TianHong</title>
     <link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon"/>
     <style>
+      /* --- General Styles --- */
       body {
         margin: 0;
         height: 100vh;
@@ -26,6 +27,7 @@
         color: rgba(255,255,255,0.85);
         margin-bottom: 30px;
       }
+      /* --- Home Button (Top Right) --- */
       .home-btn{
         position: absolute;
         top: 14px;
@@ -65,18 +67,17 @@
         background: rgba(0,0,0,0.3);
         border: 1px solid rgba(255,255,255,0.2);
       }
-      .button-container {
-        display: flex;
-        gap: 20px;
-      }
+      /* --- Top Left Container (Updated) --- */
       .top-left {
           position: absolute;
           top: 14px;
           left: 14px;
           display: flex;
-          align-items: center;
-          gap: 15px;
+          /* Now all children, including the song selector, are aligned */
+          align-items: center; 
+          gap: 20px; /* Add spacing between groups */
       }
+      /* --- Play/Pause Button --- */
       .image-btn {
           background: none;
           border: none;
@@ -103,6 +104,7 @@
       .image-btn:active{
         transform: scale(0.97);
       }
+      /* --- Waveform Visualizer --- */
       .waveform {
           display: flex;
           gap: 3px;
@@ -119,25 +121,32 @@
       .bar.paused {
         animation: fallBounce 0.4s ease-out forwards !important;
       }
+      /* --- Song Selector (Now merged) --- */
       #songSelector {
-          display: flex;
+          /* Remove absolute positioning and other center-related styles */
+          display: flex; 
           align-items: center;
           gap: 10px;
+          padding: 10px; /* Added padding to frame the new group */
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.2);
       }
       .thumb {
-          width: 140px;
-          height: 140px;
+          width: 60px; /* Reduced size for top-left position */
+          height: 60px; /* Reduced size for top-left position */
           object-fit: cover;
-          border-radius: 12px;
+          border-radius: 8px; /* Slightly smaller radius */
           border: 2px solid #fff3;
       }
       .arrow {
-          font-size: 32px;
+          font-size: 24px; /* Slightly smaller arrows */
           background: none;
           border: none;
           color: white;
           cursor: pointer;
-          padding: 10px;
+          padding: 5px; 
           user-select: none;
           transition: transform 0.15s ease;
       }
@@ -159,6 +168,7 @@
     </style>
     <script>
       const playlist = [
+          // Assuming unnamed(10) is a typo and should be unnamed(10).jpg for a real file
           { file: "ssVid.net--生分-男版.mp3", thumb: "unnamed(10).jpg" },
           { file: "sssVid.net--放纵想念.mp3", thumb: "thumb2.jpg" },
           { file: "song3.mp3", thumb: "thumb3.jpg" }
@@ -167,10 +177,9 @@
       let currentSong = 0;
       
       let audio; 
-      let thumb;
+      let thumb; 
 
       function loadSong(index) {
-
           if (typeof index === 'undefined') index = 0; 
 
           currentSong = (index + playlist.length) % playlist.length;
@@ -179,7 +188,6 @@
             audio.src = playlist[currentSong].file;
             thumb.src = playlist[currentSong].thumb;
             audio.load();
-
           }
       }
 
@@ -192,6 +200,7 @@
 
           document.getElementById("prevSong").onclick = () => loadSong(currentSong - 1);
           document.getElementById("nextSong").onclick = () => loadSong(currentSong + 1);
+
           const container = document.getElementById("waveform");
           
           const barCount = 12;
@@ -251,19 +260,17 @@
                   
                   let spring = 0.25;
                   let friction = 0.12;
-                  let bounce = 0.3;
-
+                  
                   if (target > current) {
                       velocities[i] += (target - current) * spring;
                   } else {
                       velocities[i] -= (current - target) * friction;
-
                   }
                   
                   velocities[i] *= 0.82;
                   current += velocities[i];
                   
-                  if (current < 0) current = 0; 
+                  if (current < 0) current = 0;
                   
                   barHeights[i] = current;
                   
@@ -272,7 +279,6 @@
           }
           
           document.querySelector(".image-btn").onclick = () => {
-
               initAudio(); 
               
               if (audio.paused) {
@@ -284,7 +290,6 @@
           
           audio.onplay = () => {
               bars.forEach(b => b.classList.remove("paused"));
-
           };
           
           audio.onpause = () => {
@@ -293,23 +298,20 @@
                   bar.classList.add("paused");
               });
           };
-
       });
       
-
       document.addEventListener("click", function (e) {
           const link = e.target.closest("a");
       
           if (link && link.href && !link.target && !link.href.includes("#")) {
               e.preventDefault();
-              document.body.classList.remove("fade-in"); // Fade out
+              document.body.classList.remove("fade-in");
               setTimeout(() => {
                   window.location = link.href;
-              }, 450); // Match or slightly exceed CSS transition time
+              }, 450);
           }
       });
       
-      // Dev Tools Guardrail Logic
       document.addEventListener('keydown', function(event) {
           if (event.key === "F12" || 
               ((event.ctrlKey || event.metaKey) && (event.key === "U" || event.key === "I")) ||
@@ -326,19 +328,22 @@
     <audio id="audio" preload="auto"></audio> 
 
     <a href="/" class="home-btn">Home</a>
+    
     <div class="top-left">
-      <button class="image-btn" >
-          <img src="unnamed (11).jpg" alt="Button">
-      </button>
-      <div class="waveform" id="waveform"></div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <button class="image-btn" >
+            <img src="unnamed (11).jpg" alt="Button">
+        </button>
+        <div class="waveform" id="waveform"></div>
+      </div>
+      
+      <div id="songSelector">
+          <button id="prevSong" class="arrow">❮</button>
+          <img id="songThumb" src="thumb1.jpg" class="thumb">
+          <button id="nextSong" class="arrow">❯</button>
+      </div>
     </div>
-    <div id="songSelector">
-        <button id="prevSong" class="arrow">❮</button>
-        <img id="songThumb" src="thumb1.jpg" class="thumb">
-        <button id="nextSong" class="arrow">❯</button>
-    </div>
-
-
+    
     <div class="welcome-message">
       *✧･ﾟ:* Tian Hong (天紅) *✧･ﾟ:*
     </div>
@@ -352,5 +357,5 @@
             <br>  你成了我的靈魂，我的未來...」</p>
         </ul>
     </div>
-    </body>
+  </body>
 </html>
