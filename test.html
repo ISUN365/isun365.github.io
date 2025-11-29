@@ -30,14 +30,14 @@
   }
 
   .arrow {
-    font-size: 26px;
+    font-size: 12px;
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.35);
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 18px;
     cursor: pointer;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     color: white;
     transition: 0.25s ease;
   }
@@ -48,9 +48,9 @@
 
 
   .thumbButton {
-    width: 90px;
-    height: 90px;
-    border-radius: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 18px;
     object-fit: cover;
     cursor: pointer;
     border: 2px solid rgba(255,255,255,0.25);
@@ -88,7 +88,6 @@
       100% { height: 0; }
   }
 
-  /* Home button stays the same */
   .home-btn{
     position: absolute;
     top: 14px;
@@ -109,7 +108,7 @@
 
 <a href="/" class="home-btn">Home</a>
 
-<!-- MUSIC CONTROLS -->
+
 <div id="audioControls">
   
   <div id="songSelector">
@@ -140,7 +139,7 @@ let currentSong = 0;
 const audio = document.getElementById("player");
 const thumb = document.getElementById("songThumb");
 
-/* Load a song */
+/* Load  song */
 function loadSong(i) {
   currentSong = i;
   audio.src = songs[i].src;
@@ -234,7 +233,7 @@ function animateBars() {
   }
 }
 
-/* --- play / pause visuals --- */
+
 audio.onplay = () => {
   thumb.classList.add("playing");
   bars.forEach(b => b.classList.remove("paused"));
