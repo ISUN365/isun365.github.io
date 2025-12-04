@@ -217,12 +217,10 @@
     document.getElementById("nextSong").onclick = () => {
         currentSong = (currentSong + 1) % songs.length;
         loadSong(currentSong);
-        audio.play();
     };
     document.getElementById("prevSong").onclick = () => {
         currentSong = (currentSong - 1 + songs.length) % songs.length;
         loadSong(currentSong);
-        audio.play();
     };
     
     
@@ -267,8 +265,7 @@
         if (!analyser) return;
     
         analyser.getByteFrequencyData(frequencyData);
-
-        // FIX → evenly divide FFT bins so no bar is empty
+        //Idk why some bars are dead i try to fix bug but nothing works :/
         const binsPerBar = Math.floor(frequencyData.length / barCount);
         
         for (let i = 0; i < barCount; i++) {
