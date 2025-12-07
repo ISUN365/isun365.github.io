@@ -69,9 +69,18 @@
         }
         #songSelector {
             display: flex;
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 6px;
+        }
+        
+        .song-top {
+            display: flex;
+            flex-direction: row;
             align-items: center;
             gap: 10px;
         }
+        
 
         .arrow{
             font-size: 14px;
@@ -170,18 +179,21 @@
 
     <div id="audioControls">
       <div id="songSelector">
-        <button id="prevSong" class="arrow" title="Previous">⇦</button>
-
-        <img id="songThumb" class="thumbButton" onclick="togglePlayPause()" alt="song cover">
-
-        <button id="nextSong" class="arrow" title="Next">⇨</button>
-
-        <div class="meta" role="status" aria-live="polite">
-          <div class="title" id="songTitle">—</div>
-          <div class="artist" id="songArtist">—</div>
-        </div>
+          
+          <div class="song-top">
+              <button id="prevSong" class="arrow">⇦</button>
+              <img id="songThumb" class="thumbButton" onclick="togglePlayPause()">
+              <button id="nextSong" class="arrow">⇨</button>
+          </div>
+      
+          <div class="meta">
+              <div class="title" id="songTitle">—</div>
+              <div class="artist" id="songArtist">—</div>
+          </div>
+      
+          <div id="waveform"></div>
+      
       </div>
-
       <div id="waveform" aria-hidden="true"></div>
     </div>
 
