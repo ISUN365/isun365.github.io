@@ -257,7 +257,7 @@
       }
 
       const waveform = document.getElementById('waveform');
-      const barCount = 12;
+      const barCount = 15;
       const bars = [];
       const barHeights = new Array(barCount).fill(0);
       const velocities = new Array(barCount).fill(0);
@@ -276,7 +276,7 @@
       function initAudio() {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 512; // 128 bins
+        analyser.fftSize = 1024; // 512 bins
         analyser.smoothingTimeConstant = 0.6;
 
         const src = audioCtx.createMediaElementSource(audio);
