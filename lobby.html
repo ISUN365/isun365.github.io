@@ -157,43 +157,11 @@
           .thumbButton { width:48px; height:48px; }
         }
     </style>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.body.classList.add("fade-in");
-        });
-
-        document.addEventListener("click", function (e) {
-            const link = e.target.closest("a");
-            if (link && link.href && !link.target && !link.href.includes("#")) {
-                e.preventDefault();
-                document.body.classList.add("fade-out");
-                setTimeout(() => window.location = link.href, 300);
-            }
-        });
-
-        document.addEventListener('keydown', function(event) {
-            if ((event.ctrlKey || event.shiftKey) && event.key === "I") {
-                event.preventDefault();
-                alert("You're quite curious, leh?");
-            }
-            if ((event.ctrlKey || event.metaKey) && event.key === "U") {
-                event.preventDefault();
-                alert("You're quite curious, leh?");
-            }
-            if (event.key === "F12") {
-                event.preventDefault();
-                alert("You're quite curious, leh?");
-            }
-        });
-    </script>
   </head>
 
   <body>
-    <!-- audio element (required) -->
     <audio id="player" preload="auto"></audio>
 
-    <!-- home icon -->
     <a href="/" class="home-btn" aria-label="Home">
       <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M13.9897 20.9982H19.0001V12H21.0001L12.0001 3L3.04309 12H5.00006V20.9982H10.0001M13.9897 20.9982L13.9988 14.0013C13.9994 13.4885 13.6139 13.0653 13.1167 13.0069L11.0001 13C10.4478 13 10.0001 13.4477 10.0001 14V20.9982M13.9897 20.9982H10.0001" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
