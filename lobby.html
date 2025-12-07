@@ -1,170 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>TianHong</title>
-    <link type="image/png" rel="shortcut icon" href="favicon.png" id="favicon"/>
-    
-    <style>
-        :root {
-          --bar-max: 40px;
-        }
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: url("background.gif") center/cover no-repeat;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
-            opacity: 0;
-            transition: opacity 0.45s ease;
-        }
-        body.fade-in { opacity: 1; }
+    <link rel="shortcut icon" href="favicon.png" type="image/png" id="favicon" />
 
-        p {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 30px;
-        }
-        .welcome-message {
-            font-size: 1.7em;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 25px;
-            text-shadow: 0 0 15px rgba(255,255,255,0.7);
-            backdrop-filter: blur(3px);
-            padding: 12px 24px;
-            border-radius: 14px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+    <style>
+      :root {
+        --bar-max: 40px;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url("background.gif") center/cover no-repeat;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
+        opacity: 0;
+        transition: opacity 0.45s ease;
+        color: white;
+      }
+      body.fade-in {
+        opacity: 1;
+      }
+      p {
+          font-size: 1.1rem;
+          color: rgba(255,255,255,0.85);
+          margin-bottom: 30px;
+      }
+      .welcome-message {
+        font-size: 1.7em;
+        font-weight: 600;
+        color: white;
+        margin: 18px 0;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(3px);
+        padding: 12px 24px;
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
 
       .home-btn svg {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          fill: none;
-          stroke: white;
-          stroke-width: 2;
-          transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-          border-radius: 50%; 
-          box-shadow: 0 0 0px rgba(255, 255, 255, 0);
-          cursor: pointer;
-          text-decoration: none;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        fill: none;
+        stroke: white;
+        stroke-width: 2;
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        border-radius: 50%;
+        box-shadow: 0 0 0px rgba(255, 255, 255, 0);
+        cursor: pointer;
+        text-decoration: none;
       }
       .home-btn:hover svg {
-          transform: translateY(-2px);
+        transform: translateY(-2px);
       }
 
-        #audioControls {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        #songSelector {
-            display: flex;
-            flex-direction: column; 
-            align-items: flex-start; 
-            gap: 6px;
-        }
-        
-        .song-top {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-        }
-        
+      #audioControls {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        z-index: 50;
+      }
 
-        .arrow{
-            font-size: 14px;
-            color: white;
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-            background: rgba(0,0,0,0);
-            border-radius: 80%; 
-            cursor: pointer;
-            text-decoration: none;
-            border: 1px solid rgba(255,255,255,0.0);
-        }
-        .arrow:hover{
-            transform: translateY(-2px);
-        }
+      #songSelector {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-        .thumbButton {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            object-fit: cover;
-            cursor: pointer;
-            border: 2px solid rgba(255,255,255,0.25);
-            box-shadow: 0 0 12px rgba(0,0,0,0.5);
-            transition: transform 0.15s ease, box-shadow 0.3s ease;
-        }
-        .thumbButton:active { transform: scale(0.92); }
-        .thumbButton.playing {
-            box-shadow: 0 0 18px rgba(255,255,255,0.6);
-        }
-        .meta {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-          margin-left: 6px;
-          min-width: 180px;
-        }
-        .meta .title {
-          font-weight: 600;
-          font-size: 0.95rem;
-          color: rgba(255,255,255,0.95);
-          letter-spacing: 0.2px;
-        }
-        .meta .artist {
-          font-size: 0.82rem;
-          color: rgba(255,255,255,0.7);
-        }
+      .arrow {
+        font-size: 14px;
+        color: white;
+        background: rgba(255,255,255,0);
+        border-radius: 8px;
+        cursor: pointer;
+        border: 1px solid rgba(255,255,255,0);
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform .15s ease;
+      }
+      .arrow:hover { transform: translateY(-3px); }
 
-       #waveform {
-          display: flex;
-          gap: 4px;
-          height: var(--bar-max);
-          align-items: flex-end;
-          width: calc(56px + 12px + 180px); 
-          padding-left: 6px;
-          transform: scaleY(-1);
-          margin-top: -5px;
-        }
-  
-        .bar {
-          width: 6px;
-          background: rgba(255,255,255,0.88);
-          border-radius: 10px;
-          transition: height 0.22s cubic-bezier(.2,.9,.2,1);
-          height: 4px;
-        }
-        .bar.paused {
-          animation: fallBounce .36s ease-out forwards;
-        }
-        @keyframes fallBounce {
-          0% { height: var(--current-height, 40px); }
-          70% { height: 0; }
-          100% { height: 0; }
-        }
-        @keyframes fallBounce {
-            0% { height: var(--current-height, 40px); }
-            70% { height: 0; }
-            100% { height: 0; }
-        }
+      .thumbButton {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 2px solid rgba(255,255,255,0.18);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+        display: block;
+      }
+      .thumbButton:active { transform: scale(.96); }
+      .thumbButton.playing {
+        box-shadow: 0 10px 30px rgba(255,255,255,0.12), 0 6px 22px rgba(0,0,0,0.6);
+      }
 
-        @media (max-width:420px) {
-          .meta { display:none; }
-          #waveform { width: 140px; }
-          .thumbButton { width:48px; height:48px; }
-        }
+      .meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-left: 6px;
+        min-width: 180px;
+      }
+      .meta .title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.95);
+        letter-spacing: 0.2px;
+      }
+      .meta .artist {
+        font-size: 0.82rem;
+        color: rgba(255,255,255,0.7);
+      }
+
+      #waveform {
+        display: flex;
+        gap: 10px;
+        height: var(--bar-max);
+        align-items: flex-end;
+        width: calc(56px + 12px + 180px);
+        padding-left: 6px;
+        transform: scaleY(-1);
+        margin-top: -20px;
+      }
+
+      .bar {
+        width: 6px;
+        background: rgba(255,255,255,0.88);
+        border-radius: 10px;
+        transition: height 0.22s cubic-bezier(.2,.9,.2,1);
+        height: 4px;
+      }
+      .bar.paused {
+        animation: fallBounce .36s ease-out forwards;
+      }
+      @keyframes fallBounce {
+        0% { height: var(--current-height, 40px); }
+        70% { height: 0; }
+        100% { height: 0; }
+      }
+
+      @media (max-width:420px) {
+        .meta { display:none; }
+        #waveform { width: 140px; }
+        .thumbButton { width:48px; height:48px; }
+      }
     </style>
   </head>
 
@@ -179,20 +175,18 @@
 
     <div id="audioControls">
       <div id="songSelector">
-          
-          <div class="song-top">
-              <button id="prevSong" class="arrow">⇦</button>
-              <img id="songThumb" class="thumbButton" onclick="togglePlayPause()">
-              <button id="nextSong" class="arrow">⇨</button>
-          </div>
-      
-          <div class="meta">
-            <div id="audioControls">
-              <div id="songSelector"> ... </div>
-            </div>
-            
-            <div id="waveform"></div>
-          </div>
+        <button id="prevSong" class="arrow" title="Previous">⇦</button>
+
+        <img id="songThumb" class="thumbButton" onclick="togglePlayPause()" alt="song cover">
+
+        <button id="nextSong" class="arrow" title="Next">⇨</button>
+
+        <div class="meta" role="status" aria-live="polite">
+          <div class="title" id="songTitle">—</div>
+          <div class="artist" id="songArtist">—</div>
+        </div>
+      </div>
+
       <div id="waveform" aria-hidden="true"></div>
     </div>
 
@@ -242,7 +236,7 @@
           audio.play().catch(() => {});
         }
       }
-      loadSong(0, false); 
+      loadSong(0, false);
 
       document.getElementById('nextSong').addEventListener('click', () => {
         loadSong(currentSong + 1, false);
@@ -260,9 +254,8 @@
         }
       }
 
-      // waveform
       const waveform = document.getElementById('waveform');
-      const barCount = 15;
+      const barCount = 12;
       const bars = [];
       const barHeights = new Array(barCount).fill(0);
       const velocities = new Array(barCount).fill(0);
@@ -281,7 +274,7 @@
       function initAudio() {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 1024;
+        analyser.fftSize = 512; // 128 bins
         analyser.smoothingTimeConstant = 0.6;
 
         const src = audioCtx.createMediaElementSource(audio);
@@ -347,7 +340,7 @@
           bar.classList.add('paused');
         });
       });
-
+      
       window.addEventListener('keydown', (e) => {
         if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
           e.preventDefault();
